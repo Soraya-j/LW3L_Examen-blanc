@@ -6,8 +6,8 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', async function(req,res){
-    const wishlist = await tele.loadMany({Achetée : 0})
-    const have = await tele.loadMany({Achetée : 1})
+    const wishlist = await tele.loadMany({Achete : 0})
+    const have = await tele.loadMany({Achete : 1})
     let sum = 0;
     for(let i = 0;i<have.length ;i++){
         sum = sum + have[i].Prix;
@@ -20,14 +20,14 @@ app.post("/add", async function (req, res) {
   tv.Marque = req.body.Marque;
   tv.Prix = parseInt(req.body.Prix);
   tv.Taille = parseInt(req.body.Taille);
-  tv.Achetée = 0;
+  tv.Achete = 0;
   await tv.save();
   res.redirect('/');
 });
 
 app.post("/buy", async function (req, res) {
     const tv = await tele.load({id : req.body.idtv})
-    tv.update({Achetée : 1});
+    tv.update({Achete : 1});
     tv.update({Cassée : 0})
     await tv.save();
     res.redirect('/');
