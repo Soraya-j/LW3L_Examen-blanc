@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <h1>Tv list</h1>
+
+    <form class="formadd" action="/add" method="POST">
+        <input name="Marque" placeholder="Brand"/>
+        <input name="Prix" placeholder="Price"/>
+        <input name="Taille" placeholder="Height"/>
+        <input type="submit" value="Ajouter une télévision"/>
+    </form>
+
+    <h2>WishList</h2>
+    <table>
+        <tr>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Height</th>
+            <th>Bought</th>
+            <th>Broke</th>
+            <th>Cause</th>
+        </tr>
+        <% for(tele of wishlist) { %>
+        <tr>    
+            <td><%= tele.Marque %></td>
+            <td><%= tele.Prix %></td>
+            <td><%= tele.Taille %></td>
+            <td><%= tele.Achetée %></td>
+            <td><%= tele.Cassée %></td>
+            <td><%= tele.Cause %></td>
+            <td><form action="/buy" method="post">
+                <input type="hidden" name="idtv" value="<%= tele.id %>">
+                <input type="submit" value="Achat"/>
+            </form></td>
+        </tr>
+        <% } %>
+    </table>
+
+
+    <h2>Possession</h2>
+    <table>
+        <tr>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Height</th>
+            <th>Bought</th>
+            <th>Broke</th>
+            <th>Cause</th>
+        </tr>
+        <% for(tele of have) { %>
+        <tr>    
+            <td><%= tele.Marque %></td>
+            <td><%= tele.Prix %></td>
+            <td><%= tele.Taille %></td>
+            <td><%= tele.Achetée %></td>
+            <td><%= tele.Cassée %></td>
+            <td><%= tele.Cause %></td>
+            <td><form action="/broke" method="post">
+                <input name="Cause" placeholder="Expliquer la casse"/>
+                <input type="hidden" name="idtv" value="<%= tele.id %>">
+                <input type="submit" value="Cassée"/>
+            </form></td>
+        </tr>
+        <% } %>
+    </table>
+    <h3>Somme totale dépensée :</h3> 
+    <p><%= sum %>$</p>
+</body>
+</html>
