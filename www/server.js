@@ -28,14 +28,14 @@ app.post("/add", async function (req, res) {
 app.post("/buy", async function (req, res) {
     const tv = await tele.load({id : req.body.idtv})
     tv.update({Achete : 1});
-    tv.update({Cassée : 0})
+    tv.update({Casse : 0})
     await tv.save();
     res.redirect('/');
 });
 
 app.post("/broke", async function (req, res) {
     const tv = await tele.load({id : req.body.idtv})
-    tv.update({Cassée : 1});
+    tv.update({Casse : 1});
     tv.update({Cause : req.body.Cause})
     await tv.save();
     res.redirect('/');
